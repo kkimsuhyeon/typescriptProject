@@ -1,0 +1,22 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["airbnb-typescript", "plugin:@typescript-eslint/eslint-recommended",],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { "js": "never", "jsx": "never", "ts": "never", "tsx": "never", "json": "never" },
+      
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error"
+  },
+  "settings": { "import/resolver": { "node": { "extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "moduleDirectory":["node_modules", "src/"] } } }
+}
