@@ -6,6 +6,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
     "arrow-body-style":["error", "always"],
     "linebreak-style": ["error", "windows"],
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],

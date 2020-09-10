@@ -1,9 +1,7 @@
 import { initializeInput, changeInput } from 'action/signin';
 import { INITIALIZE_INPUT, CHANGE_INPUT } from 'action/type/signin';
 
-type SigninAction =
-  | ReturnType<typeof changeInput>
-  | ReturnType<typeof initializeInput>;
+type SigninAction = ReturnType<typeof changeInput> | ReturnType<typeof initializeInput>;
 
 type SigninState = {
   form: {
