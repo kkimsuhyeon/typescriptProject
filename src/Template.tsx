@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from 'view/Home';
 import { Topbar } from 'view/App';
-import { PrivateRoute } from 'component/PrivateRoute';
 
 const Template = () => {
   return (

@@ -10,7 +10,7 @@ type LoginProps = {
 };
 
 const login = async ({ id, password }: LoginProps) => {
-  const response = await axios.get<LoginResponse>('dummy/signin.json', {
+  const response = await axios.get<LoginResponse>('signin.json', {
     // params: {
     //   id,
     //   password,
