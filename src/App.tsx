@@ -8,7 +8,7 @@ import Template from './Template';
 const typedUseSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const App = () => {
-  const isLogin = typedUseSelector((state: RootState) => { return state.user.isLogin; });
+  const { isLogin } = typedUseSelector((state: RootState) => { return state.user; });
   return <BrowserRouter>{isLogin ? <Template /> : <Signin />}</BrowserRouter>;
 };
 
