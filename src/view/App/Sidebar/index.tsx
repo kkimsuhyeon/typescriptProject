@@ -50,8 +50,21 @@ const SideBar = () => {
           <div>{`${name} 님`}</div>
         </Profile>
         <Flex flexDirection="column">
-          <SidebarContent title="Dashboard" content={['test', 'test2']} />
-          <SidebarContent title="CS 관리" content={['test', 'test2']} />
+          <SidebarContent
+            title="Dashboard"
+            content={[
+              { subTitle: '거래소 요약', path: '/TradeDashboard' },
+              { subTitle: 'CS 관리 요약', path: '/CSDashboard' },
+            ]}
+          />
+          <SidebarContent
+            title="CS 관리"
+            content={[
+              { subTitle: '원화 관리', path: '/test' },
+              { subTitle: '코인 관리', path: '/test2' },
+              { subTitle: '인증 관리', path: '/test3' },
+            ]}
+          />
         </Flex>
       </Content>
     </Wrapper>

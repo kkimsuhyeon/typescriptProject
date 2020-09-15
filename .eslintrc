@@ -18,7 +18,8 @@
       
     ],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "treatUndefinedAsUnspecified": true
   },
   "settings": { "import/resolver": { "node": { "extensions": [".js", ".jsx", ".ts", ".tsx"],
     "moduleDirectory":["node_modules", "src/"] } } }

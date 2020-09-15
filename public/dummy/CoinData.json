@@ -1,0 +1,6 @@
+{
+    "remittance_wait": "10",
+    "remittance_fail": "20",
+    "withdraw_wait": "30"
+
+}

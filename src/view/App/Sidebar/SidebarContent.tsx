@@ -39,15 +39,20 @@ const NavContents = styled.div`
   }
 `;
 
-const SidebarContent = ({ title, content, history }: { title: string; content: string[];} & RouteComponentProps) => {
+type SidebarContentProps = {
+  title?: string;
+  content?: Array<{ subTitle: string; path: string }>;
+} & RouteComponentProps;
+
+const SidebarContent = ({ title, content, history }: SidebarContentProps) => {
   const [active, setActive] = React.useState(false);
 
   const openContent = () => {
     setActive(!active);
   };
 
-  const handleClick = () => {
-    history.push('/test');
+  const handleClick = (path: string) => {
+    history.push(path);
   };
 
   return (
@@ -59,8 +64,16 @@ const SidebarContent = ({ title, content, history }: { title: string; content: s
         </NavTitle>
       </NavWrapper>
       <NavContents className={active ? 'active' : 'inActive'}>
-        {content.map((item) => {
-          return <NavContent onClick={handleClick}>{item}</NavContent>;
+        {content && content.map((items) => {
+          return (
+            <NavContent
+              onClick={() => {
+                return handleClick(items.path);
+              }}
+            >
+              {items.subTitle}
+            </NavContent>
+          );
         })}
       </NavContents>
     </>

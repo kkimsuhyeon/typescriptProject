@@ -12,6 +12,7 @@ import user from 'assets/user.png';
 
 import { initializeUserInfo } from 'action/user';
 import useUserInfo from 'lib/hook/useUserInfo';
+import { initialState } from 'lib/stateLoader';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -78,6 +79,7 @@ const Topbar = ({ history }: RouteComponentProps) => {
   const handleLogout = () => {
     sessionStorage.clear();
     dispatch(initializeUserInfo());
+    initialState();
     history.push('/');
   };
 

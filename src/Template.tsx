@@ -10,7 +10,7 @@ const PageWrapper = styled.div`
   padding-left: 180px;
   background-color: #edf0f5;
   padding-top: 55px;
-  width: 100%;
+  width: 107.7rem;
   height: 100%;
   position: absolute;
   top: 0;
@@ -25,8 +25,8 @@ const Template = () => {
       <PageWrapper>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/test" component={CSDashboard} />
-          <Route path="/test2" component={TradeDashboard} />
+          <Route path="/CSDashboard" component={CSDashboard} />
+          <Route path="/TradeDashboard" component={TradeDashboard} />
           <Route
             path="/test3"
             component={() => {
