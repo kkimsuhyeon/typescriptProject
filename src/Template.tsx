@@ -10,8 +10,8 @@ const PageWrapper = styled.div`
   padding-left: 180px;
   background-color: #edf0f5;
   padding-top: 55px;
-  width: 107.7rem;
-  height: 100%;
+  width: 90.5%;
+  height: 94.1%;
   position: absolute;
   top: 0;
   left: 0;

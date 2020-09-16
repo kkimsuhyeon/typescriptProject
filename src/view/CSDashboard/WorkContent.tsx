@@ -1,9 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import proptype from 'prop-types';
+import { Text } from 'lib/style/styled';
+import reload from 'assets/reload.png';
+import { AxiosResponse } from 'axios';
+import { AuthWorkResponse, CoinWorkResponse, FiatWorkResponse, QnaWorkResponse } from 'lib/api/csInfo';
+
+const SUB_TITLE = {
+  deposit_wait: '입금 대기',
+  whitdraw_wait: '출금 대기',
+  remittance_wait: '송금 대기',
+  remittance_fail: '송금 실패',
+  withdraw_wait: '출금 승인 대기',
+  kyc: 'KYC',
+  address: '거주지',
+  qna: 'QNA',
+};
 
 const ContentTitle = styled.div`
   font-size: 20px;
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: center;
 `;
 
 const ContentWrapper = styled.div`
@@ -35,34 +54,59 @@ const ContentCount = styled.div`
   }
 `;
 
-const WorkContent = ({
-  title,
-  request,
-  data,
-}: {
-  title: string;
-  request: () => void;
-  data: { [key: string]: string };
-}) => {
-  console.log(data);
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Button = styled.div`
+  position: absolute;
+  right: 10px;
+  display: block;
+  width: 40px;
+  height: 40px;
+`;
+
+type dataState = AuthWorkResponse | CoinWorkResponse | FiatWorkResponse | QnaWorkResponse;
+
+const WorkContent = ({ title, request }: { title: string; request: () => Promise<AxiosResponse> }) => {
+  const [data, setData] = React.useState<dataState | undefined>();
+
+  const handleReload = async () => {
+    const response = await request();
+    setData(response.data);
+  };
+
+  React.useEffect(() => {
+    handleReload();
+  }, []);
+
+  console.log('test');
+
   return (
     <ContentWrapper>
-      <ContentTitle>{title}</ContentTitle>
+      <ContentTitle>
+        <Text>{title}</Text>
+        <Button onClick={handleReload}>
+          <img src={reload} alt="reload" width="30" />
+        </Button>
+      </ContentTitle>
       <ContentList>
-        <ContentCount>
-          <span>{data?.email || 0}</span>
-          <span>건</span>
-        </ContentCount>
-        <ContentCount>
-          <span>{data?.kyc || 0}</span>
-          <span>건</span>
-        </ContentCount>
-        <ContentCount>
-          <span>{data?.address || 0}</span>
-          <span>건</span>
-        </ContentCount>
+        {data &&
+          Object.keys(data).map(item => (
+            <Content>
+              <ContentCount>
+                <span>{data[item]}</span>
+                <span>건</span>
+              </ContentCount>
+              <Text fontSize="12px" margin="15px 0 0 0">
+                {SUB_TITLE[item]}
+              </Text>
+            </Content>
+          ))}
       </ContentList>
-      <ContentList>test</ContentList>
     </ContentWrapper>
   );
 };

@@ -10,18 +10,18 @@ type LoginProps = {
 };
 
 const login = async ({ id, password }: LoginProps) => {
-  let response:AxiosResponse<LoginResponse> | Promise<any>;
   if (id === 'CS') {
-    response = await axios.get<LoginResponse>('CSLogin.json');
+    const response = await axios.get<LoginResponse>('CSLogin.json');
+    return response;
   } else if (id === 'normal') {
-    response = await axios.get<LoginResponse>('NormalLogin.json');
+    const response = await axios.get<LoginResponse>('NormalLogin.json');
+    return response;
   } else {
-    response = new Promise((resolve, reject) => {
+    const response = new Promise((resolve, reject) => {
       reject(new Error('아이디 존재 하지 않음'));
+      return undefined;
     });
   }
-
-  return response;
 };
 
 export default login;

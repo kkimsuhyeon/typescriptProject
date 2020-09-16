@@ -22,25 +22,25 @@ export type QnaWorkResponse = {
 };
 
 export const getFiatWork = async () => {
-  const response = await axios.get<AxiosResponse<FiatWorkResponse>>('FiatData.json');
+  const response = await axios.get<FiatWorkResponse>('FiatData.json');
 
   return response;
 };
 
 export const getCoinWork = async () => {
-  const response = await axios.get<AxiosResponse<CoinWorkResponse>>('CoinData.json');
+  const response = await axios.get<CoinWorkResponse>('CoinData.json');
 
   return response;
 };
 
 export const getAuthWork = async () => {
-  const response = await axios.get<AxiosResponse<AuthWorkResponse>>('AuthData.json');
+  const response = await axios.get<AuthWorkResponse>('AuthData.json');
 
   return response;
 };
 
 export const getQnaWork = async () => {
-  const response = await axios.get<AxiosResponse<QnaWorkResponse>>('QnaData.json');
+  const response = await axios.get<QnaWorkResponse>('QnaData.json');
 
   return response;
 };

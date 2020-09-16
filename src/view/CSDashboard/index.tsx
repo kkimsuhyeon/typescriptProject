@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  getAuthWork, getCoinWork, getFiatWork, getQnaWork,
-} from 'lib/api';
+import { getAuthWork, getCoinWork, getFiatWork, getQnaWork } from 'lib/api';
+import { AuthWorkResponse, CoinWorkResponse, FiatWorkResponse, QnaWorkResponse } from 'lib/api/csInfo';
 import WorkContent from './WorkContent';
+import { Circle } from 'lib/style/shape';
+import { Text } from 'lib/style/styled';
+import ManageContent from './ManageContent'
 
 const Title = styled.div`
   margin: 20px;
@@ -14,51 +16,54 @@ const Title = styled.div`
 const WorkList = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 100px;
 `;
 
+const Wrapper = styled.div`
+  height: 100%;
+`;
+
+const ManageList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 100px;
+`;
+
+const ManageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 50%;
+`;
+
+const ManageTitle = styled.div`
+  font-size: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ManageCount = styled.div``;
+
 const CSDashboard = () => {
-  const [AuthWork, setAuthWork] = React.useState();
-  const [FiatWork, setFiatWork] = React.useState();
-  const [CoinWork, setCoinWork] = React.useState();
-  const [QnaWork, setQnaWork] = React.useState();
-
-  const requestAuth = async () => {
-    const response = await getAuthWork();
-    setAuthWork(response.data);
-  };
-
-  const requestFiat = async () => {
-    const response = await getFiatWork();
-    setFiatWork(response.data);
-  };
-
-  const requestCoin = async () => {
-    const response = await getCoinWork();
-    setCoinWork(response.data);
-  };
-
-  const requestQna = async () => {
-    const response = await getQnaWork();
-    setQnaWork(response.data);
-  };
-
-  React.useEffect(() => {
-    requestAuth();
-    requestFiat();
-    requestCoin();
-    requestQna();
-  }, []);
-
   return (
-    <>
+    <Wrapper>
       <Title>처리해야 할 일</Title>
       <WorkList>
-        <WorkContent title="FiatData" request={requestAuth} data={AuthWork} />
-        <WorkContent title="CoinData" request={requestAuth} data={FiatWork} />
-        <WorkContent title="AuthData" request={requestAuth} data={CoinWork} />
-        <WorkContent title="QnaData" request={requestAuth} data={QnaWork} />
+        <WorkContent title="원화 관리" request={getFiatWork} />
+        <WorkContent title="코인 관리" request={getCoinWork} />
+        <WorkContent title="인증 관리" request={getAuthWork} />
+        <WorkContent title="고객 문의 관리" request={getQnaWork} />
       </WorkList>
-    </>
+      <Title>운영 현황</Title>
+      <ManageList>
+       <ManageContent />
+       <ManageContent />
+       <ManageContent />
+      </ManageList>
+    </Wrapper>
   );
 };
 

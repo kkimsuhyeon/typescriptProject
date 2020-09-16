@@ -23,7 +23,7 @@ const Button = styled.button`
   width: 33rem;
 `;
 
-type SigninFormProps = {
+interface SigninFormProps {
   onChange: (name: 'id' | 'password', value: string) => void;
   value: { id: string; password: string };
   onSubmit: () => void;

@@ -40,7 +40,7 @@ const Signin = () => {
   const handleSubmit = async () => {
     try {
       const response = await login({ id, password });
-      if (response.status === 200) {
+      if (response && response.status === 200) {
         setToken(response.data.access_token);
         dispatch(updateUserInfo(decodeToken(response.data.access_token)));
         dispatch(initializeInput());

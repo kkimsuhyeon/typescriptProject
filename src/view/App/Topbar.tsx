@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex, Text } from 'lib/style/styled';
 import { Circle } from 'lib/style/shape';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import logo from 'assets/logo_white.png';
@@ -62,7 +62,10 @@ const DropDown = styled.div`
   transition: 10s;
 `;
 
-const Topbar = ({ history }: RouteComponentProps) => {
+type TopbarProps = {} & RouteComponentProps<{ index: string }>;
+// RouteComponentProps에 들어가는 값이 match.params.index로 사용할 수 있게 된다
+
+const Topbar = ({ history, match }: TopbarProps) => {
   const [drop, setDrop] = React.useState(false);
   const dispatch = useDispatch();
   const { name } = useUserInfo();
