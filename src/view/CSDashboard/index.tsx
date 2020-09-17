@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getAuthWork, getCoinWork, getFiatWork, getQnaWork } from 'lib/api';
-import { AuthWorkResponse, CoinWorkResponse, FiatWorkResponse, QnaWorkResponse } from 'lib/api/csInfo';
+import { getAuthWork, getCoinWork, getFiatWork, getQnaWork, getManage } from 'lib/api';
 import WorkContent from './WorkContent';
-import { Circle } from 'lib/style/shape';
-import { Text } from 'lib/style/styled';
-import ManageContent from './ManageContent'
+import ManageContent from './ManageContent';
 
 const Title = styled.div`
-  margin: 20px;
   font-size: 30px;
   font-weight: bold;
+  padding: 30px;
 `;
 
 const WorkList = styled.div`
@@ -21,6 +18,7 @@ const WorkList = styled.div`
 
 const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
 `;
 
 const ManageList = styled.div`
@@ -28,24 +26,6 @@ const ManageList = styled.div`
   justify-content: space-between;
   margin-bottom: 100px;
 `;
-
-const ManageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  width: 50%;
-`;
-
-const ManageTitle = styled.div`
-  font-size: 20px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ManageCount = styled.div``;
 
 const CSDashboard = () => {
   return (
@@ -59,9 +39,7 @@ const CSDashboard = () => {
       </WorkList>
       <Title>운영 현황</Title>
       <ManageList>
-       <ManageContent />
-       <ManageContent />
-       <ManageContent />
+        <ManageContent request={getManage} />
       </ManageList>
     </Wrapper>
   );

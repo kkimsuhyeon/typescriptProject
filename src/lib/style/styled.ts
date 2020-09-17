@@ -16,7 +16,8 @@ interface IFlex extends IDiv {
   flexDirection?: string;
   alignItems?: string;
   justifyContent?: string;
-  flex?: string;
+  flexGrow?: string;
+  flexShrink?: string;
 }
 
 interface IInput extends IDiv {
@@ -29,6 +30,7 @@ interface IText extends IDiv {
   color?: string;
   fontSize?: string;
   fontWeight?: string;
+  textAlign?: string;
 }
 
 export const Div = styled.div<IDiv>`
@@ -72,8 +74,11 @@ export const Flex = styled(Div)<IFlex>`
   ${({ justifyContent }) => {
     return `justify-content: ${justifyContent || 'center'};`;
   }}
-  ${({ flex }) => {
-    return flex && `flex: ${flex};`;
+  ${({ flexGrow }) => {
+    return flexGrow && `flex-grow: ${flexGrow};`;
+  }}
+  ${({ flexShrink }) => {
+    return flexShrink && `flex-shrink: ${flexShrink};`;
   }}
 `;
 
@@ -113,5 +118,8 @@ export const Text = styled(Div)<IText>`
   }}
   ${({ fontWeight }) => {
     return fontWeight && `font-weight: ${fontWeight};`;
+  }}
+  ${({ textAlign }) => {
+    return textAlign && `text-align: ${textAlign};`;
   }}
 `;

@@ -31,6 +31,7 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  border-right: 1px solid black;
 `;
 
 const ContentList = styled.div`
@@ -39,7 +40,6 @@ const ContentList = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-right: 1px solid black;
 `;
 
 const ContentCount = styled.div`
@@ -82,8 +82,6 @@ const WorkContent = ({ title, request }: { title: string; request: () => Promise
   React.useEffect(() => {
     handleReload();
   }, []);
-
-  console.log('test');
 
   return (
     <ContentWrapper>

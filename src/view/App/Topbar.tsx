@@ -5,6 +5,8 @@ import { Circle } from 'lib/style/shape';
 import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { getNotice } from 'lib/api';
+
 import logo from 'assets/logo_white.png';
 import bell from 'assets/bell.png';
 import movePage from 'assets/move_page.png';
@@ -67,8 +69,37 @@ type TopbarProps = {} & RouteComponentProps<{ index: string }>;
 
 const Topbar = ({ history, match }: TopbarProps) => {
   const [drop, setDrop] = React.useState(false);
+  const testNotice = React.useRef(0);
+  const [view, setView] = React.useState<string | undefined>();
+  const [notice, setNotice] = React.useState<string[] | undefined>();
   const dispatch = useDispatch();
   const { name } = useUserInfo();
+  const timer = React.useRef<any>();
+  const tempNotice = React.useRef();
+
+  const test = async () => {
+    const response = await getNotice();
+    setNotice(response.data.notice);
+    tempNotice.current = response.data.notice[0];
+  };
+
+  React.useEffect(() => {
+    test();
+  }, []);
+
+  React.useEffect(() => {
+    timer.current = setTimeout(() => {
+      if (notice) setView(notice[testNotice.current]);
+
+      if (testNotice.current === 2) testNotice.current = 0;
+      else testNotice.current += 1;
+
+      timer.current = null;
+    }, 3000);
+    return () => {
+      timer.current = null;
+    };
+  });
 
   const handleClick = () => {
     // sessionStorage.clear();
@@ -96,7 +127,7 @@ const Topbar = ({ history, match }: TopbarProps) => {
       <Notice>
         <Flex>
           <img src={bell} alt="bell" width="20" />
-          <Text color="white">[알림]어어어어어엉어어어ㅓ어ㅓ어ㅓ어어ㅓ어ㅓ어어ㅓ엄청 긴 글</Text>
+          <Text color="white">{view || '이곳은 공지사항 자리 입니다.'}</Text>
         </Flex>
       </Notice>
       <Right>

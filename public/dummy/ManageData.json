@@ -1,0 +1,13 @@
+{
+    "Fiat":{
+        "withdraw": "10",
+        "deposit": "20"
+    },
+    "Coin":{
+        "deposit": "11",
+        "withdraw": "21"
+    },
+    "Auth":{
+        "email": "42"
+    }
+}

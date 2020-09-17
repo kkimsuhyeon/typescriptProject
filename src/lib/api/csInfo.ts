@@ -21,6 +21,12 @@ export type QnaWorkResponse = {
   qna: string;
 };
 
+export type ManageResponse = {
+  Fiat: { withdraw: string; deposit: string };
+  Coin: { deposit: string; withdraw: string };
+  Auth: { email: string };
+};
+
 export const getFiatWork = async () => {
   const response = await axios.get<FiatWorkResponse>('FiatData.json');
 
@@ -41,6 +47,12 @@ export const getAuthWork = async () => {
 
 export const getQnaWork = async () => {
   const response = await axios.get<QnaWorkResponse>('QnaData.json');
+
+  return response;
+};
+
+export const getManage = async () => {
+  const response = await axios.get<ManageResponse>('ManageData.json');
 
   return response;
 };

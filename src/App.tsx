@@ -21,7 +21,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <BrowserRouter>{isLogin ? <Template /> : <Signin />}</BrowserRouter>
-      {false && <Alert />}
+      {isOpen && <Alert />}
     </>
   );
 };

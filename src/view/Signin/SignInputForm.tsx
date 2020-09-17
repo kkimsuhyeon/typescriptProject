@@ -18,8 +18,8 @@ const SigninInputForm = ({ onChange, name, value }: SigninInputFormProps) => {
     <Input
       type={type}
       placeholder={placeholder}
-      height="24px"
-      width="29.3rem"
+      height="2rem"
+      width="30rem"
       padding="28px; 24px;"
       fontSize="24px"
       margin="0 0 24px 0;"

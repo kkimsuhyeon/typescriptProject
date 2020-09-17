@@ -20,7 +20,7 @@ const Button = styled.button`
   color: black;
   maring-top: 36px;
   cursor: pointer;
-  width: 33rem;
+  width: 33.8rem;
 `;
 
 interface SigninFormProps {

@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { closeAlert } from 'action/alert';
+import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux'
+import { RootState } from 'reducer';
 
 const Background = styled.div`
   position: fixed;
@@ -35,11 +38,22 @@ const Button = styled.div`
 `;
 
 const Alert = () => {
+  const typedUseSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const dispatch = useDispatch();
+
+  const value = typedUseSelector((state: RootState) => {
+    return state.alert.value
+  })
+
+
+  const handleClick = () => {
+    dispatch(closeAlert());
+  };
   return (
     <Background>
       <Content>
-        <div>아이디 / 비밀번호를 확인해주세요</div>
-        <Button>확인</Button>
+        <div>{value}</div>
+        <Button onClick={handleClick}>확인</Button>
       </Content>
     </Background>
   );

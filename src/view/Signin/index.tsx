@@ -11,12 +11,13 @@ import { setToken, decodeToken } from 'lib/token';
 
 import { changeInput, initializeInput } from 'action/signin';
 import { updateUserInfo } from 'action/user';
+import { openAlert } from 'action/alert';
 
 import { RootState } from 'reducer';
 import SigninForm from './SigninForm';
 
 const Container = styled(Flex)`
-  height: 100vh;
+  height: 100vh; // 1vh는 현재 화면의 1/100을 의미한다.
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
@@ -40,14 +41,12 @@ const Signin = () => {
   const handleSubmit = async () => {
     try {
       const response = await login({ id, password });
-      if (response && response.status === 200) {
-        setToken(response.data.access_token);
-        dispatch(updateUserInfo(decodeToken(response.data.access_token)));
-        dispatch(initializeInput());
-      }
+      setToken(response.data.access_token);
+      dispatch(updateUserInfo(decodeToken(response.data.access_token)));
+      dispatch(initializeInput());
     } catch (error) {
-      alert(error);
-      throw error;
+      dispatch(openAlert({ value: error.message }));
+      dispatch(initializeInput());
     }
   };
 
@@ -57,10 +56,10 @@ const Signin = () => {
 
   return (
     <Container>
-      <Flex flex="1 1">
+      <Flex flexGrow="1">
         <img src={logo} alt="logo" />
       </Flex>
-      <Flex flex="1 1" flexDirection="column">
+      <Flex flexGrow="1" flexDirection="column">
         <SigninForm onChange={handleChange} value={authInfo} onSubmit={handleSubmit} />
       </Flex>
     </Container>

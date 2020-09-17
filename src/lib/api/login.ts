@@ -9,7 +9,7 @@ type LoginProps = {
   password: string;
 };
 
-const login = async ({ id, password }: LoginProps) => {
+const login = async ({ id, password }: LoginProps):Promise<any> => {
   if (id === 'CS') {
     const response = await axios.get<LoginResponse>('CSLogin.json');
     return response;
@@ -17,9 +17,8 @@ const login = async ({ id, password }: LoginProps) => {
     const response = await axios.get<LoginResponse>('NormalLogin.json');
     return response;
   } else {
-    const response = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       reject(new Error('아이디 존재 하지 않음'));
-      return undefined;
     });
   }
 };
